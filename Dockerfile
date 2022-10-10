@@ -1,4 +1,4 @@
-FROM python:3.10.7-bullseye
+FROM python:3.10.7-slim
 
 ARG USERNAME=somebody
 ARG USER_UID=1000
