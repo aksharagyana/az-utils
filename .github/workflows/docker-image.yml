@@ -21,7 +21,7 @@ jobs:
         username: usz17
         password: ${{secrets.DOCKER_PASSWORD}}
     - name: set tag
-      run: echo "TAG=$(date +%s)" >> $GITHUB_ENV
+      run: echo "TAG=$(date +%Y%m%d)" >> $GITHUB_ENV
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag usz17/aks-utils:$TAG
     - name: Docker Push
