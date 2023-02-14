@@ -5,12 +5,9 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # runtime dependencies
-RUN set -eux; \
-	&& apt-get -y update-ca-certificates update; \
-	&& apt-get install -y --no-install-recommends \
-		curl wget uuid-dev git zip unzip tar ca-certificates curl apt-transport-https net-tools iproute2 netcat dnsutils \
-		iputils-ping iptables nmap tcpdump openssh-clientq \
-	; \
+RUN  apt-get -y update \
+     && update-ca-certificates \
+	&& apt-get install -y --no-install-recommends curl wget uuid-dev git zip unzip tar ca-certificates curl apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping iptables nmap tcpdump openssh-clientq \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash \
