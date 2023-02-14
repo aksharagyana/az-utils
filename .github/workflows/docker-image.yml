@@ -5,8 +5,6 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-env:
-  TAG: $(date +%s)
 
 jobs:
 
@@ -22,6 +20,8 @@ jobs:
         registry: docker.io
         username: usz17
         password: ${{secrets.DOCKER_PASSWORD}}
+    - name: set tag
+      run: echo "tag=$(date +%s)" >> $GITHUB_ENV
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag usz17/aks-utils:$TAG
     - name: Docker Push
