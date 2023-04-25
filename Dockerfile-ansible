@@ -1,0 +1,26 @@
+FROM python:3.9-slim-buster
+
+RUN apt-get -y update \
+    && update-ca-certificates \
+    && apt-get install -y --no-install-recommends \
+		curl wget uuid-dev git zip unzip tar ca-certificates apt-transport-https openssh-client openssh-server \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
+    && git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv \
+    && echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile \
+    && echo 'export PATH=$PATH:$HOME/.tfenv/bin' >> ~/.bashrc \
+    && ln -s ~/.tfenv/bin/* /usr/local/bin
+
+
+RUN python -m pip install --upgrade pip \
+    && python -m pip install ansible ansible-lint \
+    && pip install ansible[azure] \
+    && ansible-galaxy collection install azure.azcollection \
+    && pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt \
+    && pip install pywinrm \
+    && ansible-galaxy collection install ansible.posix \
+    && ansible-galaxy collection install containers.podman \
+    && ansible-galaxy collection install community.general \
+    && ansible-galaxy collection install ansible.windows \
+    && ansible-galaxy collection install community.windows
