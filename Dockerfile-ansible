@@ -10,7 +10,11 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
     && git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv \
     && echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile \
     && echo 'export PATH=$PATH:$HOME/.tfenv/bin' >> ~/.bashrc \
-    && ln -s ~/.tfenv/bin/* /usr/local/bin
+    && ln -s ~/.tfenv/bin/* /usr/local/bin \
+    && git clone https://github.com/iamhsa/pkenv.git ~/.pkenv \
+    && echo 'export PATH="${HOME}/.pkenv/bin:$PATH"' >> ~/.bash_profile \
+    && echo 'export PATH=$PATH:$HOME/.pkenv/bin' >> ~/.bashrc \
+    && ln -s ~/.pkenv/bin/* /usr/local/bin
 
 
 RUN python -m pip install --upgrade pip \
