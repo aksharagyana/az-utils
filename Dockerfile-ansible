@@ -16,6 +16,7 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
     && echo 'export PATH=$PATH:$HOME/.pkenv/bin' >> ~/.bashrc \
     && ln -s ~/.pkenv/bin/* /usr/local/bin
 
+RUN pkenv install 1.9.0
 
 RUN python -m pip install --upgrade pip \
     && python -m pip install ansible ansible-lint \
