@@ -9,7 +9,7 @@ RUN  apt-get -y update \
 	&& apt-get install -y --no-install-recommends ca-certificates \
 		curl wget uuid-dev git zip unzip tar \
 		apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping \
-		 docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+		software-properties-common \
 		iptables nmap tcpdump openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -23,7 +23,11 @@ RUN  curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash \
     && az aks install-cli --kubelogin-version latest \
     && az bicep install
-
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get -y update \
+    && apt-cache policy docker-ce \
+    && apt install docker-ce
 ENV DOCKER_HOST=unix:///var/run/docker.sock
 
 
