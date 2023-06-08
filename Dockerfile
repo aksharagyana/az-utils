@@ -15,7 +15,7 @@ RUN  curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
     && echo 'export PATH=$PATH:$HOME/.tfenv/bin' >> ~/.bashrc \
     && ln -s ~/.tfenv/bin/* /usr/local/bin \
     && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
-    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash \
     && az aks install-cli --kubelogin-version latest \
     && az bicep install
