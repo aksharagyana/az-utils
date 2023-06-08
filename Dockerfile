@@ -6,7 +6,11 @@ ARG USER_GID=$USER_UID
 
 # runtime dependencies
 RUN  apt-get -y update \
-	&& apt-get install -y --no-install-recommends ca-certificates curl wget uuid-dev git zip unzip tar ca-certificates curl apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping iptables nmap tcpdump openssh-client \
+	&& apt-get install -y --no-install-recommends ca-certificates \
+		curl wget uuid-dev git zip unzip tar \
+		apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping \
+		docker-ce-cli docker-ce docker-ce-rootless-extra \
+		iptables nmap tcpdump openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN  curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
@@ -19,6 +23,9 @@ RUN  curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash \
     && az aks install-cli --kubelogin-version latest \
     && az bicep install
+
+ENV DOCKER_HOST=unix:///var/run/docker.sock
+
 
 # RUN cd "$(mktemp -d)" \
 #     && OS="$(uname | tr '[:upper:]' '[:lower:]')" \
