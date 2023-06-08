@@ -1,4 +1,4 @@
-FROM python:3.12.0b2-slim-buster
+FROM ubuntu
 
 ARG USERNAME=somebody
 ARG USER_UID=1000
