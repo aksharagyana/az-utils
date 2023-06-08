@@ -6,7 +6,7 @@ ARG USER_GID=$USER_UID
 
 # runtime dependencies
 RUN  apt-get -y update \
-        && update-ca-certificates \
+        && ca-certificates \
 	&& apt-get install -y --no-install-recommends curl wget uuid-dev git zip unzip tar ca-certificates curl apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping iptables nmap tcpdump openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
