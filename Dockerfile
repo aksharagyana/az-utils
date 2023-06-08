@@ -1,4 +1,4 @@
-FROM python:3.12.0a5-slim
+FROM 3.12.0b2-slim-buster
 
 ARG USERNAME=somebody
 ARG USER_UID=1000
@@ -22,10 +22,7 @@ RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | b
     && apt-get update \
     && apt-get install -y kubectl \
     && az aks install-cli --kubelogin-version latest \
-    && curl -Lo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz \
-    && tar -xzf terraform-docs.tar.gz \
-    && chmod +x terraform-docs \
-    && mv terraform-docs /usr/local/bin/terraform-docs
+    && az bicep install
 
 RUN cd "$(mktemp -d)" \
     && OS="$(uname | tr '[:upper:]' '[:lower:]')" \
