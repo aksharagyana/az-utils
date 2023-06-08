@@ -9,7 +9,7 @@ RUN  apt-get -y update \
 	&& apt-get install -y --no-install-recommends ca-certificates \
 		curl wget uuid-dev git zip unzip tar \
 		apt-transport-https net-tools iproute2 netcat dnsutils iputils-ping \
-		docker-ce-cli docker-ce docker-ce-rootless-extra \
+		 docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
 		iptables nmap tcpdump openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
