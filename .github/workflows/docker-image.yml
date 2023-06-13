@@ -46,3 +46,9 @@ jobs:
         username: usz17
         password: ${{secrets.DOCKER_PASSWORD}}
         repository: usz17/ansible-latest
+    - name: set ansible image name
+      run: echo "IMAGE_NAME=hashicorp" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile-tf --tag usz17/$IMAGE_NAME:$TAG
+    - name: Docker Push
+      run: docker push usz17/$IMAGE_NAME:$TAG
