@@ -1,7 +1,6 @@
 FROM ubuntu
 
 RUN apt-get -y update \
-    && update-ca-certificates \
     && apt-get install -y --no-install-recommends \
 		curl wget uuid-dev git zip unzip tar ca-certificates apt-transport-https openssh-client openssh-server \
 	&& rm -rf /var/lib/apt/lists/*
