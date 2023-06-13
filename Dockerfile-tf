@@ -1,0 +1,22 @@
+FROM ubuntu
+
+RUN apt-get -y update \
+    && update-ca-certificates \
+    && apt-get install -y --no-install-recommends \
+		curl wget uuid-dev git zip unzip tar ca-certificates apt-transport-https openssh-client openssh-server \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
+    && git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv \
+    && echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile \
+    && echo 'export PATH=$PATH:$HOME/.tfenv/bin' >> ~/.bashrc \
+    && ln -s ~/.tfenv/bin/* /usr/local/bin \
+    && git clone https://github.com/iamhsa/pkenv.git ~/.pkenv \
+    && echo 'export PATH="${HOME}/.pkenv/bin:$PATH"' >> ~/.bash_profile \
+    && echo 'export PATH=$PATH:$HOME/.pkenv/bin' >> ~/.bashrc \
+    && ln -s ~/.pkenv/bin/* /usr/local/bin
+
+RUN pkenv install 1.9.0 \
+    && az extension add --name image-copy-extension \
+    && tfenv install 1.5.0 \
+    && tfenv use 1.5.0
