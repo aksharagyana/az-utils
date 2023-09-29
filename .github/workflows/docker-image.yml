@@ -22,18 +22,18 @@ jobs:
         password: ${{secrets.DOCKER_PASSWORD}}
     - name: set tag
       run: echo "TAG=$(date +%Y%m%d)" >> $GITHUB_ENV
-    - name: set image name
-      run: echo "IMAGE_NAME=az-utils" >> $GITHUB_ENV
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag usz17/$IMAGE_NAME:$TAG
-    - name: Docker Push
-      run: docker push usz17/$IMAGE_NAME:$TAG
-    - name: Docker Hub Description
-      uses: peter-evans/dockerhub-description@v3
-      with:
-        username: usz17
-        password: ${{secrets.DOCKER_PASSWORD}}
-        repository: usz17/az-utils
+    # - name: set image name
+    #   run: echo "IMAGE_NAME=az-utils" >> $GITHUB_ENV
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag usz17/$IMAGE_NAME:$TAG
+    # - name: Docker Push
+    #   run: docker push usz17/$IMAGE_NAME:$TAG
+    # - name: Docker Hub Description
+    #   uses: peter-evans/dockerhub-description@v3
+    #   with:
+    #     username: usz17
+    #     password: ${{secrets.DOCKER_PASSWORD}}
+    #     repository: usz17/az-utils
     - name: set ansible image name
       run: echo "IMAGE_NAME=ansible-latest" >> $GITHUB_ENV
     - name: Build the Docker image
