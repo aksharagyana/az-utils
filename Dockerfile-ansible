@@ -24,4 +24,6 @@ RUN pkenv install 1.9.0 \
 RUN python -m pip install --upgrade pip \
     && python -m pip install ansible ansible-lint \
     && pip install ansible[azure] \
-    && ansible-galaxy collection install azure.azcollection 
+    && ansible-galaxy collection install azure.azcollection \
+    && pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
+
