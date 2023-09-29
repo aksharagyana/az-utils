@@ -24,12 +24,12 @@ RUN pkenv install 1.9.0 \
 RUN python -m pip install --upgrade pip \
     && python -m pip install ansible ansible-lint \
     && pip install ansible[azure] \
-    && ansible-galaxy collection install azure.azcollection \
+    && ansible-galaxy collection install azure.azcollection --force \
     && pip install pywinrm \
-    && ansible-galaxy collection install ansible.posix \
-    && ansible-galaxy collection install containers.podman \
-	&& ansible-galaxy collection install community.general \
-	&& ansible-galaxy collection install ansible.windows \
-	&& ansible-galaxy collection install community.windows
+    && ansible-galaxy collection install ansible.posix --force \
+    && ansible-galaxy collection install containers.podman --force \
+	&& ansible-galaxy collection install community.general --force \
+	&& ansible-galaxy collection install ansible.windows --force \
+	&& ansible-galaxy collection install community.windows --force
 
 
