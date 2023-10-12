@@ -1,0 +1,6 @@
+FROM bitnami/git
+
+RUN apt-get update -y \
+    && apt-get install -y wget \
+    && wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver \
+    && chmod +x /usr/local/bin/semver
