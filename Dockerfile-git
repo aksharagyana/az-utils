@@ -1,8 +1,7 @@
 FROM ubuntu
 
 RUN apt-get -y update \
-    && update-ca-certificates \
     && apt-get install -y --no-install-recommends \
-		curl wget ca-certificates jq \
+		curl wget jq \
     && wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver \
     && chmod +x /usr/local/bin/semver
