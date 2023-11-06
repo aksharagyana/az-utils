@@ -1,6 +1,6 @@
 FROM ubuntu
 
 RUN apt-get -y update \
-    && apt-get install -y curl wget jq \
+    && apt-get install -y curl wget jq git \
     && wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver \
     && chmod +x /usr/local/bin/semver
