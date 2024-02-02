@@ -46,3 +46,15 @@ jobs:
         username: usz17
         password: ${{secrets.DOCKER_PASSWORD}}
         repository: usz17/ansible-latest
+    - name: set golang image name
+      run: echo "IMAGE_NAME=golang-az-latest" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: docker build . --file golang-az-basics --tag usz17/$IMAGE_NAME:$TAG
+    - name: Docker Push
+      run: docker push usz17/$IMAGE_NAME:$TAG
+    - name: Docker Hub Description
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: usz17
+        password: ${{secrets.DOCKER_PASSWORD}}
+        repository: usz17/ansible-latest
